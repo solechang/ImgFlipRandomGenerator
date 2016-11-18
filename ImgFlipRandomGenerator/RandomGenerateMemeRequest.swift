@@ -11,8 +11,6 @@ import Alamofire
 
 class RandomGenerateMemeRequest: BaseRequest {
 
-    
-
     override func path() -> String {
         return "\(apiEndpointURL)/get_memes"
     }

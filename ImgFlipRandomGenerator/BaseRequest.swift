@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class BaseRequest: NSObject {
 
+    // API endpoint
     let apiEndpointURL = "https://api.imgflip.com"
     
     var completionBlock: ((_ responseObject: JSON?, _ error: Error?) -> ())?
@@ -43,29 +44,14 @@ class BaseRequest: NSObject {
     func runRequest() {
         Alamofire.request(path(), method: method(), parameters: params(), encoding: JSONEncoding.default, headers: headers()).responseJSON(completionHandler: { response in
             
-            print("\n------------------------------------------------------")
-            print("------------------------------------------------------")
-            print("REQUEST:")
-            print(response.request)
-            print("------------------------------------------------------")
-            print("RESPONSE:")
-            print(response.response)
-            print("------------------------------------------------------")
-            print("RESULT:")
-            print(response.result)
-            print("------------------------------------------------------")
-            
             if let responseValue = response.result.value {
-                print("JSON:\n\(responseValue)")
-                print("------------------------------------------------------")
-                print("------------------------------------------------------\n")
-                
+    
                 if self.completionBlock != nil {
                     let json = JSON(responseValue)
                     
                     if (json["error"] != nil)
                     {
-                        self.completionBlock!(json, NSError(domain: "fanstori", code: 1, userInfo: [NSLocalizedDescriptionKey : json["error"].stringValue]))
+                        self.completionBlock!(json, NSError(domain: "imgfliprandom", code: 1, userInfo: [NSLocalizedDescriptionKey : json["error"].stringValue]))
                     }
                     else
                     {

@@ -21,11 +21,14 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.setUpView()
+        
+    }
+    
+    func setUpView() {
         self.activityIndicator.hidesWhenStopped = true
         self.topTextField.delegate = self
         self.bottomTextField.delegate = self
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,24 +53,28 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func submitButtonPressed(_ sender: AnyObject) {
         
+        // resign keyboard
         self.topTextField.resignFirstResponder()
         self.bottomTextField.resignFirstResponder()
         
         var flag :Bool = false
+        
         // Check if both top and bottom textfields are filled
         if ((self.topTextField.text?.characters.count)! > 0) {
             flag = true
         } else {
             // Show alert
-            self.showAlert(text: "Please make sure the top textfield is filled")
+            self.showAlert(text: "Please make sure the top text is filled")
             flag = false
+            return;
         }
+        
         if ((self.bottomTextField.text?.characters.count)! > 0 && flag) {
             
             flag = true
         } else {
              // Show alert
-             self.showAlert(text: "Please make sure the bottom textfield is filled")
+             self.showAlert(text: "Please make sure the bottom text is filled")
             flag = false
         }
         
@@ -104,6 +111,8 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
                     let values =     json["data"]["memes"].arrayValue
                     
                     for value in values {
+                        
+                        // Extracting meme data
                         let meme = Meme()
                         meme.id = value["id"].stringValue
                         meme.name = value["name"].stringValue
@@ -126,7 +135,8 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
     
     func chooseRandomMeme() {
         
-        let diceRoll = Int(arc4random_uniform(    UInt32(self.memes.count-1)) + 1)
+        // Randomly choose meme
+        let diceRoll = Int(arc4random_uniform( UInt32(self.memes.count-1)) + 1)
         
         let meme = self.memes[diceRoll]
         
@@ -136,7 +146,7 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
     
     func getRandomMemeImage (meme:Meme ) {
 
-        // NOTE**** I WOULD NEVER HARDCODE USERNAME OR PASSWORD. For this exercise I have, but I would rather ask user to login to get crendentials and store in keychain.
+        // NOTE**** I WOULD NEVER HARDCODE USERNAME OR PASSWORD. For this exercise purposes, but I would rather ask user to login to get crendentials and store in keychain (depending on functionality)
         let username :String = "solechang"
         let password :String = "imgflip2"
         
@@ -164,13 +174,9 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
                 }
             }
             
-       
-
-            
         }
         request.runRequest()
     }
-    
     
     func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         URLSession.shared.dataTask(with: url) {
@@ -180,11 +186,11 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
     }
     
     func downloadImage(url: URL) {
-        print("Download Started")
+//        print("Download Started")
         getDataFromUrl(url: url) { (data, response, error)  in
             guard let data = data, error == nil else { return }
             print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
+//            print("Download Finished")
             DispatchQueue.main.async() { () -> Void in
                 
                 self.generatedImageView.image = UIImage(data: data)

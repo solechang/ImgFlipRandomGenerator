@@ -110,6 +110,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B929F2491DDF893E00E261C2 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B9A7F7F31DDE909300682490 /* ImgFlipViewController.swift */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
 		B9A7F7B91DDE8ED000682490 = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +143,7 @@
 		B9A7F7C41DDE8ED000682490 /* ImgFlipRandomGenerator */ = {
 			isa = PBXGroup;
 			children = (
+				B929F2491DDF893E00E261C2 /* View Controller */,
 				B9AEEAD81DDEED11004CE738 /* Requests */,
 				B9AEEAD71DDEECAB004CE738 /* Model */,
 				B9A7F7C51DDE8ED000682490 /* AppDelegate.swift */,
@@ -142,7 +151,6 @@
 				B9A7F7CC1DDE8ED000682490 /* Assets.xcassets */,
 				B9A7F7CE1DDE8ED000682490 /* LaunchScreen.storyboard */,
 				B9A7F7D11DDE8ED000682490 /* Info.plist */,
-				B9A7F7F31DDE909300682490 /* ImgFlipViewController.swift */,
 			);
 			path = ImgFlipRandomGenerator;
 			sourceTree = "<group>";
