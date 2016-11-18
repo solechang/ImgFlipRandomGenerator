@@ -1,0 +1,6 @@
+framework module Pods_ImgFlipRandomGeneratorTests {
+  umbrella header "Pods-ImgFlipRandomGeneratorTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
