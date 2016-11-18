@@ -20,6 +20,7 @@
 		B9A7F7F61DDE99CF00682490 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A7F7F51DDE99CF00682490 /* BaseRequest.swift */; };
 		B9AEEAD61DDEEA91004CE738 /* RandomGenerateMemeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AEEAD51DDEEA91004CE738 /* RandomGenerateMemeRequest.swift */; };
 		B9AEEADA1DDEEE5F004CE738 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AEEAD91DDEEE5F004CE738 /* Meme.swift */; };
+		B9AEEADC1DDEFB46004CE738 /* CaptionImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AEEADB1DDEFB46004CE738 /* CaptionImageRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		B9A7F7F51DDE99CF00682490 /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		B9AEEAD51DDEEA91004CE738 /* RandomGenerateMemeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomGenerateMemeRequest.swift; sourceTree = "<group>"; };
 		B9AEEAD91DDEEE5F004CE738 /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
+		B9AEEADB1DDEFB46004CE738 /* CaptionImageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptionImageRequest.swift; sourceTree = "<group>"; };
 		E5FA4FE005B50AF5C400C785 /* Pods-ImgFlipRandomGenerator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgFlipRandomGenerator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImgFlipRandomGenerator/Pods-ImgFlipRandomGenerator.debug.xcconfig"; sourceTree = "<group>"; };
 		F595E5A8EBDE71DFBB75547C /* Pods-ImgFlipRandomGeneratorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImgFlipRandomGeneratorTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImgFlipRandomGeneratorTests/Pods-ImgFlipRandomGeneratorTests.release.xcconfig"; sourceTree = "<group>"; };
 		F6A0997827FFE0EE07117566 /* Pods_ImgFlipRandomGenerator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImgFlipRandomGenerator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +178,7 @@
 			children = (
 				B9A7F7F51DDE99CF00682490 /* BaseRequest.swift */,
 				B9AEEAD51DDEEA91004CE738 /* RandomGenerateMemeRequest.swift */,
+				B9AEEADB1DDEFB46004CE738 /* CaptionImageRequest.swift */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				B9A7F7F41DDE909300682490 /* ImgFlipViewController.swift in Sources */,
 				B9A7F7F61DDE99CF00682490 /* BaseRequest.swift in Sources */,
 				B9AEEAD61DDEEA91004CE738 /* RandomGenerateMemeRequest.swift in Sources */,
+				B9AEEADC1DDEFB46004CE738 /* CaptionImageRequest.swift in Sources */,
 				B9AEEADA1DDEEE5F004CE738 /* Meme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

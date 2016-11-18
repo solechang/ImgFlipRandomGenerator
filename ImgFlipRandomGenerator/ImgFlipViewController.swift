@@ -15,6 +15,7 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+     var memes: [Meme] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,8 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
         self.activityIndicator.hidesWhenStopped = true
         self.userTextField.delegate = self
         
-        // Do any additional setup after loading the view.
+       
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,102 +42,106 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func submitButtonPressed(_ sender: AnyObject) {
         
+         self.getRandomMeme()
         
     }
     
-    func getHomePlayers () {
-        
+    func getRandomMeme () {
+        self.submitButton.isEnabled = false
+        self.activityIndicator.startAnimating()
         
         let request: BaseRequest = RandomGenerateMemeRequest()
         
-        request.completionBlock = { (response, error) in
+        request.completionBlock = {
+            (response, error) in
             
-            
-            if (error != nil)
-            {
-                
+            if (error != nil) {
+                // Error Logs
                 print(error!.localizedDescription)
-                // TODO: Error handling
-            }
-            else
-            {
+
+            } else {
                 if let json = response {
+                    self.memes = [] // reiniatlize array
                     
-                    let team = Player()
-                    team.playerName = self.game!.home_name
-                    team.id = self.game!.home_id
-                    team.teamId = self.game!.home_id
-                    team.position = "Team"
+                    let values =     json["data"]["memes"].arrayValue
                     
-                    //team.profileImage = (self.game?.away_name)!
-                    //self.playersArray.append(team)
-                    
-                    self.players.append(team)
-                    self.homePlayers.append(team)
-                    
-                    for (_, v) in json   {
-                        let value = v.arrayValue
+                    for value in values {
+                        let meme = Meme()
+                        meme.id = value["id"].stringValue
+                        meme.name = value["name"].stringValue
+                        meme.height = value["height"].stringValue
+                        meme.width = value["width"].stringValue
                         
-                        for (_,p) in value.enumerated() {
-                            let player = Player()
-                            
-                            player.playerName = p["name"].stringValue
-                            player.jersey_number = p["jersey_number"].stringValue
-                            player.id = p["id"].stringValue
-                            player.position = p["position"].stringValue
-                            player.depth = p["depth"].stringValue
-                            player.status = p["status"].stringValue
-                            player.teamId = self.game!.home_id
-                            //player.profileImage = (self.game?.away_id)!
-                            
-                            //self.playersArray.append(player)
-                            //self.playersWithoutFilter.append(player)
-                            
-                            if (!self.playerIdsSeen.contains(player.id))
-                            {
-                                self.players.append(player)
-                                self.homePlayers.append(player)
-                                
-                                self.playerIdsSeen.append(player.id)
-                            }
-                            
-                        }
+                        self.memes.append(meme)
                         
                     }
-                    
-                    /*
-                     if (self.searchFlag == true) {
-                     
-                     let searchPredicate = NSPredicate(format: "playerName CONTAINS[c] %@", self.playerNameTextField.text!)
-                     
-                     self.playersArray = (self.playersArray as NSArray).filtered(using: searchPredicate) as! [Player]
-                     
-                     }
-                     */
-                    
-                    //self.playersArray.sort { $0.playerName < $1.playerName }
-                    self.players.sort { $0.playerName < $1.playerName }
-                    self.filteredPlayers = self.players
-                    
-                    
-                    self.tableView.reloadData()
-                    
+                 
                 }
-                
             }
+            
+            self.chooseRandomMeme()
+
+            }
+            request.runRequest()
+        }
+    
+    
+    func chooseRandomMeme() {
+        
+        let diceRoll = Int(arc4random_uniform(    UInt32(self.memes.count)) + 1)
+        
+        let meme = self.memes[diceRoll]
+        
+        getRandomMemeImage(meme: meme)
+      
+    }
+    
+    func getRandomMemeImage (meme:Meme ) {
+
+        // NOTE**** I WOULD NEVER HARDCODE USERNAME OR PASSWORD. For this exercise I have, but I would rather ask user to login in different view.
+        let username :String = "solechang"
+        let password :String = "imgflip2"
+        
+        let request: BaseRequest = CaptionImageRequest(template_id: meme.id, username: username, password: password, text0: self.userTextField.text!, text1:self.userTextField.text!)
+        
+        request.completionBlock = {
+            (response, error) in
+            
+            if (error != nil) {
+                // Error Logs
+                print("3.0) ", error!.localizedDescription)
+                
+            } else {
+                if let json = response {
+                    
+                    let imageurl :String = json["data"]["page_url"].stringValue
+                   print("4.0) ", imageurl)
+                    let url = URL(string: imageurl)
+                    
+                    DispatchQueue.global().async {
+                        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                        DispatchQueue.main.async {
+                            self.generatedImageView.image = UIImage(data: data!)
+                        }
+                    }
+                    
+                    print( "3.1) " , imageurl)
+                }
+            }
+            
+        self.submitButton.isEnabled = true
+        self.activityIndicator.stopAnimating()
+
             
         }
         request.runRequest()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  
+    
 }
+
+
+
+
+
