@@ -8,7 +8,7 @@ I have insured that when the “Submit” button is pressed, the user cannot spa
 
 As for the meme’s image, it is autoscaled on the screen depending on the size of the image. I have made sure to make the meme fit in other iPhone sizes through AutoLayout. Check out the Main.storyboard to see the AutoLayout constraints I have made.
 
-This project uses a BaseRequest via Alamofire which connects to ImgFlip’s API. As for specific endpoints, I have created 2 other requests that inherits BaseRequest. RandomGenerateMemeRequest is utilized to get the top 100 memes so that I can choose one meme randomly. CaptionImageRequest generates the meme image with the random meme I have chosen, and with the user’s entered top and bottom texts.
+This project uses BaseRequest which connects to ImgFlip’s API. As for specific endpoints, I have created 2 other requests that inherits BaseRequest. RandomGenerateMemeRequest is utilized to get the top 100 memes so that I can choose one meme randomly. CaptionImageRequest generates the meme image with the random meme I have chosen, and with the user’s entered top and bottom texts.
 
 Also, I have created a Meme object to extract the top 100 memes for modeling.
 
