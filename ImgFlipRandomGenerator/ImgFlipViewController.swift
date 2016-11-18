@@ -23,7 +23,7 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
         self.activityIndicator.hidesWhenStopped = true
         self.userTextField.delegate = self
         
-       
+        
         
     }
 
@@ -114,18 +114,15 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
             } else {
                 if let json = response {
                     
-                    let imageurl :String = json["data"]["page_url"].stringValue
-                   print("4.0) ", imageurl)
-                    let url = URL(string: imageurl)
-                    
-                    DispatchQueue.global().async {
-                        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-                        DispatchQueue.main.async {
-                            self.generatedImageView.image = UIImage(data: data!)
-                        }
+                    let imageurl :String = json["data"]["url"].stringValue
+    
+                    if let checkedUrl = URL(string: imageurl) {
+                        self.generatedImageView?.contentMode = .scaleAspectFit
+
+                        self.downloadImage(url: checkedUrl)
                     }
                     
-                    print( "3.1) " , imageurl)
+
                 }
             }
             
@@ -137,7 +134,27 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
         request.runRequest()
     }
     
-  
+    
+    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
+    }
+    
+    func downloadImage(url: URL) {
+        print("Download Started")
+        getDataFromUrl(url: url) { (data, response, error)  in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            DispatchQueue.main.async() { () -> Void in
+                
+                self.generatedImageView.image = UIImage(data: data)
+                print("5.) ", self.generatedImageView.image)
+            }
+        }
+    }
     
 }
 
