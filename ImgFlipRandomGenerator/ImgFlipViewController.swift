@@ -12,17 +12,18 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var generatedImageView: UIImageView!
     @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet weak var userTextField: UITextField!
+    @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var bottomTextField: UITextField!
      var memes: [Meme] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.activityIndicator.hidesWhenStopped = true
-        self.userTextField.delegate = self
-        
+        self.topTextField.delegate = self
+        self.bottomTextField.delegate = self
         
         
     }
@@ -34,7 +35,14 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        
+        if (self.topTextField == textField) {
+            self.bottomTextField.becomeFirstResponder()
+        } else if ( self.bottomTextField == textField) {
+            textField.resignFirstResponder()
+            self.submitButtonPressed(self)
+        }
+
         return true
     }
     
@@ -42,8 +50,38 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func submitButtonPressed(_ sender: AnyObject) {
         
-         self.getRandomMeme()
+        self.topTextField.resignFirstResponder()
+        self.bottomTextField.resignFirstResponder()
         
+        var flag :Bool = false
+        // Check if both top and bottom textfields are filled
+        if ((self.topTextField.text?.characters.count)! > 0) {
+            flag = true
+        } else {
+            // Show alert
+            self.showAlert(text: "Please make sure the top textfield is filled")
+            flag = false
+        }
+        if ((self.bottomTextField.text?.characters.count)! > 0 && flag) {
+            
+            flag = true
+        } else {
+             // Show alert
+             self.showAlert(text: "Please make sure the bottom textfield is filled")
+            flag = false
+        }
+        
+        if (flag) {
+            self.getRandomMeme()
+        }
+ 
+        
+    }
+    
+    func showAlert (text: String) {
+        let alert = UIAlertController(title: "Oops", message: text, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func getRandomMeme () {
@@ -88,7 +126,7 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
     
     func chooseRandomMeme() {
         
-        let diceRoll = Int(arc4random_uniform(    UInt32(self.memes.count)) + 1)
+        let diceRoll = Int(arc4random_uniform(    UInt32(self.memes.count-1)) + 1)
         
         let meme = self.memes[diceRoll]
         
@@ -98,11 +136,11 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
     
     func getRandomMemeImage (meme:Meme ) {
 
-        // NOTE**** I WOULD NEVER HARDCODE USERNAME OR PASSWORD. For this exercise I have, but I would rather ask user to login in different view.
+        // NOTE**** I WOULD NEVER HARDCODE USERNAME OR PASSWORD. For this exercise I have, but I would rather ask user to login to get crendentials and store in keychain.
         let username :String = "solechang"
         let password :String = "imgflip2"
         
-        let request: BaseRequest = CaptionImageRequest(template_id: meme.id, username: username, password: password, text0: self.userTextField.text!, text1:self.userTextField.text!)
+        let request: BaseRequest = CaptionImageRequest(template_id: meme.id, username: username, password: password, text0: self.topTextField.text!, text1:self.bottomTextField.text!)
         
         request.completionBlock = {
             (response, error) in
@@ -126,8 +164,7 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
                 }
             }
             
-        self.submitButton.isEnabled = true
-        self.activityIndicator.stopAnimating()
+       
 
             
         }
@@ -151,7 +188,9 @@ class ImgFlipViewController: UIViewController, UITextFieldDelegate {
             DispatchQueue.main.async() { () -> Void in
                 
                 self.generatedImageView.image = UIImage(data: data)
-                print("5.) ", self.generatedImageView.image)
+                self.submitButton.isEnabled = true
+                self.activityIndicator.stopAnimating()
+                
             }
         }
     }

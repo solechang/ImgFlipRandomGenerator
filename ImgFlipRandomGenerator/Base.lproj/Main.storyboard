@@ -21,6 +21,9 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E2f-VB-Vqr"/>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter top text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lNw-el-QBg">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="2zF-lT-o8e"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -33,6 +36,9 @@
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="yq1-h2-SfO"/>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter bottom text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Th8-mq-xx3">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="qtb-a9-3aO"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -49,14 +55,14 @@
                             <constraint firstItem="yq1-h2-SfO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5Kw-Ie-wLt"/>
                             <constraint firstItem="Th8-mq-xx3" firstAttribute="top" secondItem="lNw-el-QBg" secondAttribute="bottom" constant="18" id="83i-gV-GsB"/>
                             <constraint firstItem="czb-JU-Q5I" firstAttribute="top" secondItem="Th8-mq-xx3" secondAttribute="bottom" constant="21" id="BAk-on-67s"/>
-                            <constraint firstItem="E2f-VB-Vqr" firstAttribute="top" secondItem="yq1-h2-SfO" secondAttribute="bottom" constant="12" id="E5q-Zn-Y1Z"/>
+                            <constraint firstItem="E2f-VB-Vqr" firstAttribute="top" secondItem="yq1-h2-SfO" secondAttribute="bottom" constant="40" id="E5q-Zn-Y1Z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Th8-mq-xx3" secondAttribute="trailing" constant="22" id="EO2-Hu-73e"/>
                             <constraint firstItem="lNw-el-QBg" firstAttribute="top" secondItem="G2D-KL-VP5" secondAttribute="bottom" constant="14" id="MFx-gi-x0W"/>
                             <constraint firstItem="lNw-el-QBg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="21" id="Mxu-jG-Oav"/>
                             <constraint firstItem="G2D-KL-VP5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PU8-AM-h69"/>
                             <constraint firstItem="czb-JU-Q5I" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RMF-kb-IIU"/>
                             <constraint firstItem="E2f-VB-Vqr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="TQ3-eU-dko"/>
-                            <constraint firstItem="G2D-KL-VP5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Y2M-aQ-XHI"/>
+                            <constraint firstItem="G2D-KL-VP5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="Y2M-aQ-XHI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lNw-el-QBg" secondAttribute="trailing" constant="22" id="Ydi-d5-r5u"/>
                             <constraint firstItem="Th8-mq-xx3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="21" id="axz-i6-nnS"/>
                             <constraint firstItem="E2f-VB-Vqr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="b2c-ak-7Im"/>
@@ -66,9 +72,10 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="yq1-h2-SfO" id="7Ok-aJ-OfR"/>
+                        <outlet property="bottomTextField" destination="Th8-mq-xx3" id="V1b-WV-0g2"/>
                         <outlet property="generatedImageView" destination="E2f-VB-Vqr" id="5Kd-oN-rK7"/>
                         <outlet property="submitButton" destination="czb-JU-Q5I" id="ggR-rw-PiX"/>
-                        <outlet property="userTextField" destination="lNw-el-QBg" id="Tdy-TG-Iqr"/>
+                        <outlet property="topTextField" destination="lNw-el-QBg" id="4fj-gl-BcE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
