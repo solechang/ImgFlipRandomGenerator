@@ -1,5 +1,5 @@
 # ImgFlipRandomGenerator
-README:
+
 In this exercise, I have created a random meme generator with ImgFlip’s API via Swift 3.0. The view consists of 2 textfields, top and bottom texts, that needs to be filled before generating a meme. If user does not fill all the textfields, an alert will pop up prompting them to do so.
 
 In addition, the user will have to press the “Submit” button to generate the meme. An activity indicator will popup to show that an meme is randomly being generated, and has completely loaded the meme image.
