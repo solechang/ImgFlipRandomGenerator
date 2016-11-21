@@ -12,7 +12,7 @@ This project uses BaseRequest which connects to ImgFlip’s API. As for specific
 
 Also, I have created a Meme object to extract the top 100 memes for modeling.
 
-NOTE* I WOULD NEVER HARDCODE USERNAME OR PASSWORD. For this exercise purposes, but I would rather ask user to login to get crendentials and store in keychain (depending on functionality)
+NOTE* I WOULD NEVER HARDCODE USERNAME OR PASSWORD. As for this exercise purposes I have, but I would rather ask user to login to get crendentials and store in keychain (depending on functionality)
 
 Cocoapods used:
 - Alamofire
