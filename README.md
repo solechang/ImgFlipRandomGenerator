@@ -4,7 +4,7 @@ In this exercise, I have created a random meme generator with ImgFlip’s API vi
 
 In addition, the user will have to press the “Submit” button to generate the meme. An activity indicator will popup to show that an meme is randomly being generated, and has completely loaded the meme image.
 
-I have insured that when the “Submit” button is pressed, the user cannot spam it and call to the ImgFlip API multiple times at once. This is done by disabling the “Submit” button when first pressed and then enabling again when the meme image is completely generated and loaded.
+I have ensured that when the “Submit” button is pressed, the user cannot spam it and call to the ImgFlip API multiple times at once. This is done by disabling the “Submit” button when first pressed and then enabling again when the meme image is completely generated and loaded.
 
 As for the meme’s image, it is autoscaled on the screen depending on the size of the image. I have made sure to make the meme fit in other iPhone sizes through AutoLayout. Check out the Main.storyboard to see the AutoLayout constraints I have made.
 
